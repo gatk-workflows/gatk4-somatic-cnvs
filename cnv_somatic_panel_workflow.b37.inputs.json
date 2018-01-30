@@ -1,0 +1,48 @@
+{
+  "##_COMMENT1": "Inputs",
+  "CNVSomaticPanelWorkflow.normal_bams": ["gs://gatk-test-data/cnv/somatic/SM-74NEG.bam", "gs://gatk-test-data/cnv/somatic/SM-74NF5.bam"],
+  "CNVSomaticPanelWorkflow.normal_bais": ["gs://gatk-test-data/cnv/somatic/SM-74NEG.bam.bai", "gs://gatk-test-data/cnv/somatic/SM-74NF5.bam.bai"],
+  "CNVSomaticPanelWorkflow.pon_entity_id": "wes-do-gc",
+
+  "##_COMMENT2": "Reference and Resource",
+  "CNVSomaticPanelWorkflow.ref_fasta_dict": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.dict",
+  "CNVSomaticPanelWorkflow.ref_fasta": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta",
+  "CNVSomaticPanelWorkflow.ref_fasta_fai": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
+  "CNVSomaticPanelWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
+  
+  "##_COMMENT3": "Docker",
+  "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.0.0.0",
+
+  "##_COMMENT4": "Disk Size Optional",
+  "##CNVSomaticPanelWorkflow.AnnotateIntervals.disk_space_gb": "",
+  "##CNVSomaticPanelWorkflow.PreprocessIntervals.disk_space_gb": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.disk_space_gb": "",
+  "##CNVSomaticPanelWorkflow.CollectCounts.disk_space_gb": "",
+
+  "##_COMMENT5": "Memory Optional",
+  "##CNVSomaticPanelWorkflow.CollectCounts.mem": "",
+  "##CNVSomaticPanelWorkflow.mem_for_create_read_count_pon": "",
+  "##CNVSomaticPanelWorkflow.PreprocessIntervals.mem": "",
+  "##CNVSomaticPanelWorkflow.AnnotateIntervals.mem": "",
+
+
+  "##_COMMENT6": "preemptible_attempts Optional",
+  "CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.preemptible_attempts": 3,
+  "CNVSomaticPanelWorkflow.AnnotateIntervals.preemptible_attempts": 3,
+  "CNVSomaticPanelWorkflow.PreprocessIntervals.preemptible_attempts": 3,
+  "CNVSomaticPanelWorkflow.CollectCounts.preemptible_attempts": 3,
+
+  "##_COMMENT7": "MISC Optional",
+  "##CNVSomaticPanelWorkflow.CollectCounts.format": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.maximum_zeros_in_interval_percentage": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.minimum_interval_median_percentile": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.maximum_zeros_in_sample_percentage": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.extreme_sample_median_percentile": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.number_of_eigensamples": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.extreme_outlier_truncation_percentile": "",
+  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.do_impute_zeros": "",
+  "##CNVSomaticPanelWorkflow.PreprocessIntervals.padding": "",
+  "##CNVSomaticPanelWorkflow.PreprocessIntervals.bin_length": "",
+  "##CNVSomaticPanelWorkflow.do_explicit_gc_correction": "True",
+  "##CNVSomaticPanelWorkflow.gatk4_jar_override": ""
+}
