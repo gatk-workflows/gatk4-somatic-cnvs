@@ -43,6 +43,6 @@
   "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.do_impute_zeros": "",
   "##CNVSomaticPanelWorkflow.PreprocessIntervals.padding": "",
   "##CNVSomaticPanelWorkflow.PreprocessIntervals.bin_length": "",
-  "##CNVSomaticPanelWorkflow.do_explicit_gc_correction": "True",
+  "CNVSomaticPanelWorkflow.do_explicit_gc_correction": "True",
   "##CNVSomaticPanelWorkflow.gatk4_jar_override": ""
 }
