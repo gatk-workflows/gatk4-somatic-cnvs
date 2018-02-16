@@ -12,7 +12,6 @@
 
   "##_COMMENT3": "Docker",
   "##CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.0.1.2",
-  "CNVSomaticPanelWorkflow.gatk_docker": "us.gcr.io/broad-gatk/gatk",
 
   "##_COMMENT4": "Disk Size Optional",
   "##CNVSomaticPanelWorkflow.AnnotateIntervals.disk_space_gb": "(optional) Int?",
