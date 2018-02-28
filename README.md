@@ -16,6 +16,8 @@ To get started, create the json template (using ``java -jar wdltool.jar inputs <
 
 #### Required parameters in the somatic panel workflow
 
+Important: The normal_bams samples in the json can be used test the wdl, they are NOT to be used to create a panel of normals for sequence analysis. For instructions on creating a proper PON please refer to user the documents https://software.broadinstitute.org/gatk/documentation/ .
+
 The reference used must be the same between PoN and case samples.
 
 - ``CNVSomaticPanelWorkflow.gatk_docker`` -- GATK Docker image (e.g., ``broadinstitute/gatk:latest``).
@@ -59,3 +61,8 @@ To invoke Oncotator on the called tumor copy-ratio segments:
 
 
 Further explanation of these task-level parameters may be found by invoking the ``--help`` documentation available in the gatk.jar for each tool.
+
+##Important 
+The data in gs://gatk-test-data/1kgp are from the 1000 Genomes Project (http://www.internationalgenome.org/home) and are provided as is. 
+If you have questions on the data, please direct them to the 1000 Genomes Project email at info@1000genomes.org.
+Do NOT post questions about the data to the GATK forum.
