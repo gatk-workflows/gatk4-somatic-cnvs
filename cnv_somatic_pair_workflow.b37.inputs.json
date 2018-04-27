@@ -14,7 +14,7 @@
   "CNVSomaticPairWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
 
   "##_COMMENT3": "Docker",
-  "CNVSomaticPairWorkflow.gatk_docker": "broadinstitute/gatk:4.0.1.2",
+  "CNVSomaticPairWorkflow.gatk_docker": "broadinstitute/gatk:4.0.4.0",
   "##CNVSomaticPairWorkflow.oncotator_docker": "(optional) String?",
 
   "##_COMMENT4": "Memory Optional",
@@ -64,7 +64,7 @@
 
   "##_COMMENT7": "Misc Optional",
   "##CNVSomaticPairWorkflow.additional_args_for_oncotator": "(optional) String?",
-  "##CNVSomaticPairWorkflow.is_run_oncotator": "(optional) Boolean?",
+  "CNVSomaticPairWorkflow.is_run_oncotator": true,
   "##CNVSomaticPairWorkflow.ModelSegmentsNormal.normal_allelic_counts": "(optional) File?",
   "##CNVSomaticPairWorkflow.num_smoothing_iterations_per_fit": "(optional) Int?",
   "##CNVSomaticPairWorkflow.calling_copy_ratio_z_score_threshold": "(optional) Float?",
