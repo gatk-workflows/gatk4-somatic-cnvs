@@ -1,7 +1,7 @@
 {
   "##_COMMENT1": "Inputs",
-  "CNVSomaticPanelWorkflow.normal_bams": ["gs://gatk-test-data/cnv/somatic/SM-74NEG.bam", "gs://gatk-test-data/cnv/somatic/SM-74NF5.bam"],
-  "CNVSomaticPanelWorkflow.normal_bais": ["gs://gatk-test-data/cnv/somatic/SM-74NEG.bam.bai", "gs://gatk-test-data/cnv/somatic/SM-74NF5.bam.bai"],
+  "CNVSomaticPanelWorkflow.normal_bam_list": "bam_list_normal.list",
+  "CNVSomaticPanelWorkflow.normal_bai_list": "bai_list_normal.list",
   "CNVSomaticPanelWorkflow.pon_entity_id": "wes-do-gc",
 
   "##_COMMENT2": "Reference and Resource",
@@ -11,7 +11,7 @@
   "CNVSomaticPanelWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
 
   "##_COMMENT3": "Docker",
-  "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.0.4.0",
+  "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.0.5.1",
 
   "##_COMMENT4": "Disk Size Optional",
   "##CNVSomaticPanelWorkflow.AnnotateIntervals.disk_space_gb": "(optional) Int?",
@@ -44,7 +44,7 @@
   "##CNVSomaticPanelWorkflow.number_of_eigensamples": "(optional) Int?",
   "##CNVSomaticPanelWorkflow.extreme_outlier_truncation_percentile": "(optional) Float?",
   "##CNVSomaticPanelWorkflow.do_impute_zeros": "(optional) Boolean?",
-  "##CNVSomaticPanelWorkflow.padding": "(optional) Int?",
+  "##CNVSomaticPanelWorkflow.padding": "150",
   "##CNVSomaticPanelWorkflow.bin_length": "(optional) Int?",
   "##CNVSomaticPanelWorkflow.do_explicit_gc_correction": "True",
   "##CNVSomaticPanelWorkflow.gatk4_jar_override": "(optional) File?"

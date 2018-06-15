@@ -15,6 +15,7 @@
 #
 #############
 
+
 import "cnv_common_tasks.wdl" as CNVTasks
 
 workflow CNVSomaticPanelWorkflow {
@@ -23,8 +24,10 @@ workflow CNVSomaticPanelWorkflow {
     #### required basic arguments ####
     ##################################
     File intervals
-    Array[String] normal_bams
-    Array[String] normal_bais
+    File normal_bam_list
+    File normal_bai_list
+    Array[File] normal_bams = read_lines(normal_bam_list)
+    Array[File] normal_bais = read_lines(normal_bai_list)
     String pon_entity_id
     File ref_fasta_dict
     File ref_fasta_fai
@@ -71,7 +74,7 @@ workflow CNVSomaticPanelWorkflow {
     Int? maximum_chunk_size
     Int? mem_gb_for_create_read_count_pon
 
-    Array[Pair[String, String]] normal_bams_and_bais = zip(normal_bams, normal_bais)
+    Array[Pair[File, File]] normal_bams_and_bais = zip(normal_bams, normal_bais)
 
     call CNVTasks.PreprocessIntervals {
         input:
