@@ -63,6 +63,7 @@ To invoke Oncotator on the called tumor copy-ratio segments:
 Further explanation of these task-level parameters may be found by invoking the ``--help`` documentation available in the gatk.jar for each tool.
 
 ##Important 
-The data in gs://gatk-test-data/1kgp are from the 1000 Genomes Project (http://www.internationalgenome.org/home) and are provided as is. 
-If you have questions on the data, please direct them to the 1000 Genomes Project email at info@1000genomes.org.
-Do NOT post questions about the data to the GATK forum.
+- The data in gs://gatk-test-data/1kgp are from the 1000 Genomes Project (http://www.internationalgenome.org/home) and are provided as is. 
+  If you have questions on the data, please direct them to the 1000 Genomes Project email at info@1000genomes.org. Do NOT post questions about the data to the GATK forum.
+- Runtime parameters are optimized for Broad's Google Cloud Platform implementation.
+- For help running workflows on the Google Cloud Platform or locally please view the following tutorial [(How to) Execute Workflows from the gatk-workflows Git Organization](https://software.broadinstitute.org/gatk/documentation/article?id=12521).
