@@ -2,21 +2,31 @@
 #
 # Notes:
 #
-# - The interval-list file is required for both WGS and WES workflows and should be a Picard or GATK-style interval list.
-#   These intervals will be padded on both sides by the amount specified by PreprocessIntervals.padding (default 250)
-#   and split into bins of length specified by PreprocessIntervals.bin_length (default 1000; specify 0 to skip binning,
-#   e.g. for WES).  For WGS, the intervals should simply cover the autosomal chromosomes (sex chromosomes may be
+# - The intervals argument is required for both WGS and WES workflows and accepts formats compatible with the
+#   GATK -L argument (see https://gatkforums.broadinstitute.org/gatk/discussion/11009/intervals-and-interval-lists).
+#   These intervals will be padded on both sides by the amount specified by padding (default 250)
+#   and split into bins of length specified by bin_length (default 1000; specify 0 to skip binning,
+#   e.g., for WES).  For WGS, the intervals should simply cover the autosomal chromosomes (sex chromosomes may be
 #   included, but care should be taken to 1) avoid creating panels of mixed sex, and 2) denoise case samples only
 #   with panels containing only individuals of the same sex as the case samples).
+#
+# - Intervals can be blacklisted from coverage collection and all downstream steps by using the blacklist_intervals
+#   argument, which accepts formats compatible with the GATK -XL argument
+#   (see https://gatkforums.broadinstitute.org/gatk/discussion/11009/intervals-and-interval-lists).
+#   This may be useful for excluding centromeric regions, etc. from analysis.  Alternatively, these regions may
+#   be manually filtered from the final callset.
+#
+#  A reasonable blacklist for excluded intervals (-XL) can be found at:
+#   hg19: gs://gatk-best-practices/somatic-b37/CNV_and_centromere_blacklist.hg19.list
+#   hg38: gs://gatk-best-practices/somatic-hg38/CNV_and_centromere_blacklist.hg38liftover.list (untested)
 #
 # - Example invocation:
 #
 #       java -jar cromwell.jar run cnv_somatic_panel_workflow.wdl -i my_parameters.json
 #
-# gatk4.0.1.2 tag release
 #############
 
-import "cnv_common_tasks.wdl" as CNVTasks
+import "../cnv_common_tasks.wdl" as CNVTasks
 
 workflow CNVSomaticPanelWorkflow {
 
@@ -24,6 +34,7 @@ workflow CNVSomaticPanelWorkflow {
     #### required basic arguments ####
     ##################################
     File intervals
+    File? blacklist_intervals
     Array[String] normal_bams
     Array[String] normal_bais
     String pon_entity_id
@@ -51,12 +62,17 @@ workflow CNVSomaticPanelWorkflow {
     ##################################################
     #### optional arguments for AnnotateIntervals ####
     ##################################################
+    File? mappability_track_bed
+    File? mappability_track_bed_idx
+    File? segmental_duplication_track_bed
+    File? segmental_duplication_track_bed_idx
+    Int? feature_query_lookahead
     Int? mem_gb_for_annotate_intervals
 
     ##############################################
     #### optional arguments for CollectCounts ####
     ##############################################
-    String? format
+    String? collect_counts_format
     Int? mem_gb_for_collect_counts
 
     ##############################################################
@@ -69,6 +85,7 @@ workflow CNVSomaticPanelWorkflow {
     Boolean? do_impute_zeros
     Float? extreme_outlier_truncation_percentile
     Int? number_of_eigensamples
+    Int? maximum_chunk_size
     Int? mem_gb_for_create_read_count_pon
 
     Array[Pair[String, String]] normal_bams_and_bais = zip(normal_bams, normal_bais)
@@ -76,6 +93,7 @@ workflow CNVSomaticPanelWorkflow {
     call CNVTasks.PreprocessIntervals {
         input:
             intervals = intervals,
+            blacklist_intervals = blacklist_intervals,
             ref_fasta = ref_fasta,
             ref_fasta_fai = ref_fasta_fai,
             ref_fasta_dict = ref_fasta_dict,
@@ -94,6 +112,11 @@ workflow CNVSomaticPanelWorkflow {
                 ref_fasta = ref_fasta,
                 ref_fasta_fai = ref_fasta_fai,
                 ref_fasta_dict = ref_fasta_dict,
+                mappability_track_bed = mappability_track_bed,
+                mappability_track_bed_idx = mappability_track_bed_idx,
+                segmental_duplication_track_bed = segmental_duplication_track_bed,
+                segmental_duplication_track_bed_idx = segmental_duplication_track_bed_idx,
+                feature_query_lookahead = feature_query_lookahead,
                 gatk4_jar_override = gatk4_jar_override,
                 gatk_docker = gatk_docker,
                 mem_gb = mem_gb_for_annotate_intervals,
@@ -110,7 +133,7 @@ workflow CNVSomaticPanelWorkflow {
                 ref_fasta = ref_fasta,
                 ref_fasta_fai = ref_fasta_fai,
                 ref_fasta_dict = ref_fasta_dict,
-                format = format,
+                format = collect_counts_format,
                 gatk4_jar_override = gatk4_jar_override,
                 gatk_docker = gatk_docker,
                 mem_gb = mem_gb_for_collect_counts,
@@ -129,6 +152,7 @@ workflow CNVSomaticPanelWorkflow {
             do_impute_zeros = do_impute_zeros,
             extreme_outlier_truncation_percentile = extreme_outlier_truncation_percentile,
             number_of_eigensamples = number_of_eigensamples,
+            maximum_chunk_size = maximum_chunk_size,
             annotated_intervals = AnnotateIntervals.annotated_intervals,
             gatk4_jar_override = gatk4_jar_override,
             gatk_docker = gatk_docker,
@@ -154,6 +178,7 @@ task CreateReadCountPanelOfNormals {
     Boolean? do_impute_zeros
     Float? extreme_outlier_truncation_percentile
     Int? number_of_eigensamples
+    Int? maximum_chunk_size
     File? annotated_intervals   #do not perform explicit GC correction by default
     File? gatk4_jar_override
 
@@ -181,6 +206,7 @@ task CreateReadCountPanelOfNormals {
             --do-impute-zeros ${default="true" do_impute_zeros} \
             --extreme-outlier-truncation-percentile ${default="0.1" extreme_outlier_truncation_percentile} \
             --number-of-eigensamples ${default="20" number_of_eigensamples} \
+            --maximum-chunk-size ${default="16777216" maximum_chunk_size} \
             ${"--annotated-intervals " + annotated_intervals} \
             --output ${pon_entity_id}.pon.hdf5
     >>>
