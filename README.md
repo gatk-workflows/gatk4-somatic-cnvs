@@ -4,11 +4,11 @@
 Workflows for somatic copy number variant analysis.
 
 ### cnv_somatic_panel_workflow :
-Builds a panel of normals (PoN) for the cnv pair workflow.
+Builds a panel of normals (PON) for the cnv pair workflow.
 
 #### Requirements/Expectations
 
-Important: The normal_bams samples in the json can be used test the wdl, they are NOT to be used to create a panel of normals for sequence analysis. For instructions on creating a proper PON please refer to user the documents https://software.broadinstitute.org/gatk/documentation/ .
+Important: The normal_bams samples in the json can be used test the wdl, they are NOT to be used to create a panel of normals for sequence analysis. For instructions on creating a proper PON please refer to user the documents [Panel of Normals](https://software.broadinstitute.org/gatk/documentation/article?id=11053) and [Generate a CNV panel of normals with CreateReadCountPanelOfNormals](https://gatkforums.broadinstitute.org/dsde/discussion/11682#2) .
 
 The reference used must be the same between PoN and case samples.
 
@@ -30,7 +30,7 @@ In additional, there are optional workflow-level and task-level parameters that 
 Further explanation of other task-level parameters may be found by invoking the ``--help`` documentation available in the gatk.jar for each tool.
 
 #### Outputs 
-- Read count pon in HD5 format
+- Read count PON in HD5 format
 - Addtional metrics
 
 ### cnv_somatic_pair_workflow :
@@ -62,11 +62,11 @@ To invoke Oncotator on the called tumor copy-ratio segments:
 Further explanation of these task-level parameters may be found by invoking the ``--help`` documentation available in the gatk.jar for each tool.
 
 #### Outputs
-- modeled segments for tumor and normal
-- modeled segments plot for tumor and normal
-- denoised copy ratios for tumor and normal
-- denoised copy ratios plot for tumor and normal
-- denoised copy ratios lim 4 plot for tumor and normal
+- Modeled segments for tumor and normal
+- Modeled segments plot for tumor and normal
+- Denoised copy ratios for tumor and normal
+- Denoised copy ratios plot for tumor and normal
+- Denoised copy ratios lim 4 plot for tumor and normal
 - Addtional metrics 
 
 ### Software version requirements :
