@@ -77,3 +77,4 @@ task OncotateSegments {
         File oncotated_called_gene_list_file = "${basename_called_file}.gene_list.txt"
     }
 }
+
