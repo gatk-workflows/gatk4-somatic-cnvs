@@ -11,7 +11,7 @@
   "CNVSomaticPanelWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
 
   "##_COMMENT3": "Docker",
-  "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.0.8.0",
+  "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.1.0.0",
 
   "##_COMMENT4": "Disk Size Optional",
   "##CNVSomaticPanelWorkflow.AnnotateIntervals.disk_space_gb": "(optional) Int?",

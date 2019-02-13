@@ -4,8 +4,8 @@
 #
 # - The intervals argument is required for both WGS and WES workflows and accepts formats compatible with the
 #   GATK -L argument (see https://gatkforums.broadinstitute.org/gatk/discussion/11009/intervals-and-interval-lists).
-#   These intervals will be padded on both sides by the amount specified by PreprocessIntervals.padding (default 250)
-#   and split into bins of length specified by PreprocessIntervals.bin_length (default 1000; specify 0 to skip binning,
+#   These intervals will be padded on both sides by the amount specified by padding (default 250)
+#   and split into bins of length specified by bin_length (default 1000; specify 0 to skip binning,
 #   e.g., for WES).  For WGS, the intervals should simply cover the autosomal chromosomes (sex chromosomes may be
 #   included, but care should be taken to 1) avoid creating panels of mixed sex, and 2) denoise case samples only
 #   with panels containing only individuals of the same sex as the case samples).
@@ -16,13 +16,17 @@
 #   This may be useful for excluding centromeric regions, etc. from analysis.  Alternatively, these regions may
 #   be manually filtered from the final callset.
 #
+#  A reasonable blacklist for excluded intervals (-XL) can be found at:
+#   hg19: gs://gatk-best-practices/somatic-b37/CNV_and_centromere_blacklist.hg19.list
+#   hg38: gs://gatk-best-practices/somatic-hg38/CNV_and_centromere_blacklist.hg38liftover.list (untested)
+#
 # - Example invocation:
 #
 #       java -jar cromwell.jar run cnv_somatic_panel_workflow.wdl -i my_parameters.json
 #
 #############
 
-import "cnv_common_tasks.wdl" as CNVTasks
+import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/1.2/cnv_common_tasks.wdl" as CNVTasks
 
 workflow CNVSomaticPanelWorkflow {
 
@@ -58,12 +62,17 @@ workflow CNVSomaticPanelWorkflow {
     ##################################################
     #### optional arguments for AnnotateIntervals ####
     ##################################################
+    File? mappability_track_bed
+    File? mappability_track_bed_idx
+    File? segmental_duplication_track_bed
+    File? segmental_duplication_track_bed_idx
+    Int? feature_query_lookahead
     Int? mem_gb_for_annotate_intervals
 
     ##############################################
     #### optional arguments for CollectCounts ####
     ##############################################
-    String? format
+    String? collect_counts_format
     Int? mem_gb_for_collect_counts
 
     ##############################################################
@@ -103,6 +112,11 @@ workflow CNVSomaticPanelWorkflow {
                 ref_fasta = ref_fasta,
                 ref_fasta_fai = ref_fasta_fai,
                 ref_fasta_dict = ref_fasta_dict,
+                mappability_track_bed = mappability_track_bed,
+                mappability_track_bed_idx = mappability_track_bed_idx,
+                segmental_duplication_track_bed = segmental_duplication_track_bed,
+                segmental_duplication_track_bed_idx = segmental_duplication_track_bed_idx,
+                feature_query_lookahead = feature_query_lookahead,
                 gatk4_jar_override = gatk4_jar_override,
                 gatk_docker = gatk_docker,
                 mem_gb = mem_gb_for_annotate_intervals,
@@ -119,7 +133,7 @@ workflow CNVSomaticPanelWorkflow {
                 ref_fasta = ref_fasta,
                 ref_fasta_fai = ref_fasta_fai,
                 ref_fasta_dict = ref_fasta_dict,
-                format = format,
+                format = collect_counts_format,
                 gatk4_jar_override = gatk4_jar_override,
                 gatk_docker = gatk_docker,
                 mem_gb = mem_gb_for_collect_counts,

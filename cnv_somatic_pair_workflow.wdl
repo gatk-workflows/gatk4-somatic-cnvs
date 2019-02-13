@@ -4,8 +4,8 @@
 #
 # - The intervals argument is required for both WGS and WES workflows and accepts formats compatible with the
 #   GATK -L argument (see https://gatkforums.broadinstitute.org/gatk/discussion/11009/intervals-and-interval-lists).
-#   These intervals will be padded on both sides by the amount specified by PreprocessIntervals.padding (default 250)
-#   and split into bins of length specified by PreprocessIntervals.bin_length (default 1000; specify 0 to skip binning,
+#   These intervals will be padded on both sides by the amount specified by padding (default 250)
+#   and split into bins of length specified by bin_length (default 1000; specify 0 to skip binning,
 #   e.g., for WES).  For WGS, the intervals should simply cover the autosomal chromosomes (sex chromosomes may be
 #   included, but care should be taken to 1) avoid creating panels of mixed sex, and 2) denoise case samples only
 #   with panels containing only individuals of the same sex as the case samples).
@@ -16,6 +16,10 @@
 #   This may be useful for excluding centromeric regions, etc. from analysis.  Alternatively, these regions may
 #   be manually filtered from the final callset.
 #
+#  A reasonable blacklist for excluded intervals (-XL) can be found at:
+#   hg19: gs://gatk-best-practices/somatic-b37/CNV_and_centromere_blacklist.hg19.list
+#   hg38: gs://gatk-best-practices/somatic-hg38/CNV_and_centromere_blacklist.hg38liftover.list (untested)
+#
 # - The sites file (common_sites) should be a Picard or GATK-style interval list.  This is a list of sites
 #   of known variation at which allelic counts will be collected for use in modeling minor-allele fractions.
 #
@@ -25,8 +29,8 @@
 #
 #############
 
-import "cnv_common_tasks.wdl" as CNVTasks
-import "cnv_somatic_oncotator_workflow.wdl" as CNVOncotator
+import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/1.2/cnv_common_tasks.wdl" as CNVTasks
+import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/1.2/cnv_somatic_oncotator_workflow.wdl" as CNVOncotator
 
 workflow CNVSomaticPairWorkflow {
 
@@ -66,7 +70,7 @@ workflow CNVSomaticPairWorkflow {
     ##############################################
     #### optional arguments for CollectCounts ####
     ##############################################
-    String? format
+    String? collect_counts_format
     Int? mem_gb_for_collect_counts
 
     #####################################################
@@ -86,6 +90,7 @@ workflow CNVSomaticPairWorkflow {
     ##############################################
     Int? max_num_segments_per_chromosome
     Int? min_total_allele_count
+    Int? min_total_allele_count_normal
     Float? genotyping_homozygous_log_ratio_threshold
     Float? genotyping_base_error_rate
     Float? kernel_variance_copy_ratio
@@ -165,7 +170,7 @@ workflow CNVSomaticPairWorkflow {
             ref_fasta = ref_fasta,
             ref_fasta_fai = ref_fasta_fai,
             ref_fasta_dict = ref_fasta_dict,
-            format = format,
+            format = collect_counts_format,
             gatk4_jar_override = gatk4_jar_override,
             gatk_docker = gatk_docker,
             mem_gb = mem_gb_for_collect_counts,
@@ -214,6 +219,7 @@ workflow CNVSomaticPairWorkflow {
             normal_allelic_counts = CollectAllelicCountsNormal.allelic_counts,
             max_num_segments_per_chromosome = max_num_segments_per_chromosome,
             min_total_allele_count = min_total_allele_count,
+            min_total_allele_count_normal = min_total_allele_count_normal,
             genotyping_homozygous_log_ratio_threshold = genotyping_homozygous_log_ratio_threshold,
             genotyping_base_error_rate = genotyping_base_error_rate,
             kernel_variance_copy_ratio = kernel_variance_copy_ratio,
@@ -295,7 +301,7 @@ workflow CNVSomaticPairWorkflow {
                 ref_fasta = ref_fasta,
                 ref_fasta_fai = ref_fasta_fai,
                 ref_fasta_dict = ref_fasta_dict,
-                format = format,
+                format = collect_counts_format,
                 gatk4_jar_override = gatk4_jar_override,
                 gatk_docker = gatk_docker,
                 mem_gb = mem_gb_for_collect_counts,
@@ -341,7 +347,7 @@ workflow CNVSomaticPairWorkflow {
                 denoised_copy_ratios = DenoiseReadCountsNormal.denoised_copy_ratios,
                 allelic_counts = CollectAllelicCountsNormal.allelic_counts,
                 max_num_segments_per_chromosome = max_num_segments_per_chromosome,
-                min_total_allele_count = min_total_allele_count,
+                min_total_allele_count = min_total_allele_count_normal,
                 genotyping_homozygous_log_ratio_threshold = genotyping_homozygous_log_ratio_threshold,
                 genotyping_base_error_rate = genotyping_base_error_rate,
                 kernel_variance_copy_ratio = kernel_variance_copy_ratio,
@@ -446,6 +452,7 @@ workflow CNVSomaticPairWorkflow {
         File copy_ratio_parameters_tumor = ModelSegmentsTumor.copy_ratio_parameters
         File allele_fraction_parameters_tumor = ModelSegmentsTumor.allele_fraction_parameters
         File called_copy_ratio_segments_tumor = CallCopyRatioSegmentsTumor.called_copy_ratio_segments
+        File called_copy_ratio_legacy_segments_tumor = CallCopyRatioSegmentsTumor.called_copy_ratio_legacy_segments
         File denoised_copy_ratios_plot_tumor = PlotDenoisedCopyRatiosTumor.denoised_copy_ratios_plot
         File denoised_copy_ratios_lim_4_plot_tumor = PlotDenoisedCopyRatiosTumor.denoised_copy_ratios_lim_4_plot
         File standardized_MAD_tumor = PlotDenoisedCopyRatiosTumor.standardized_MAD
@@ -472,6 +479,7 @@ workflow CNVSomaticPairWorkflow {
         File? copy_ratio_parameters_normal = ModelSegmentsNormal.copy_ratio_parameters
         File? allele_fraction_parameters_normal = ModelSegmentsNormal.allele_fraction_parameters
         File? called_copy_ratio_segments_normal = CallCopyRatioSegmentsNormal.called_copy_ratio_segments
+        File? called_copy_ratio_legacy_segments_normal = CallCopyRatioSegmentsNormal.called_copy_ratio_legacy_segments
         File? denoised_copy_ratios_plot_normal = PlotDenoisedCopyRatiosNormal.denoised_copy_ratios_plot
         File? denoised_copy_ratios_lim_4_plot_normal = PlotDenoisedCopyRatiosNormal.denoised_copy_ratios_lim_4_plot
         File? standardized_MAD_normal = PlotDenoisedCopyRatiosNormal.standardized_MAD
@@ -536,6 +544,7 @@ task ModelSegments {
     File? normal_allelic_counts
     Int? max_num_segments_per_chromosome
     Int? min_total_allele_count
+    Int? min_total_allele_count_normal
     Float? genotyping_homozygous_log_ratio_threshold
     Float? genotyping_base_error_rate
     Float? kernel_variance_copy_ratio
@@ -571,6 +580,11 @@ task ModelSegments {
     # If optional output_dir not specified, use "out"
     String output_dir_ = select_first([output_dir, "out"])
 
+    # default values are min_total_allele_count_ = 0 in matched-normal mode
+    #                                            = 30 in case-only mode
+    Int default_min_total_allele_count = if defined(normal_allelic_counts) then 0 else 30
+    Int min_total_allele_count_ = select_first([min_total_allele_count, default_min_total_allele_count])
+
     command <<<
         set -e
         mkdir ${output_dir_}
@@ -580,7 +594,8 @@ task ModelSegments {
             --denoised-copy-ratios ${denoised_copy_ratios} \
             --allelic-counts ${allelic_counts} \
             ${"--normal-allelic-counts " + normal_allelic_counts} \
-            --minimum-total-allele-count ${default="30" min_total_allele_count} \
+            --minimum-total-allele-count-case ${min_total_allele_count_} \
+            --minimum-total-allele-count-normal ${default="30" min_total_allele_count_normal} \
             --genotyping-homozygous-log-ratio-threshold ${default="-10.0" genotyping_homozygous_log_ratio_threshold} \
             --genotyping-base-error-rate ${default="0.05" genotyping_base_error_rate} \
             --maximum-number-of-segments-per-chromosome ${default="1000" max_num_segments_per_chromosome} \
@@ -591,14 +606,14 @@ task ModelSegments {
             --window-size ${sep=" --window-size " window_sizes} \
             --number-of-changepoints-penalty-factor ${default="1.0" num_changepoints_penalty_factor} \
             --minor-allele-fraction-prior-alpha ${default="25.0" minor_allele_fraction_prior_alpha} \
-            --number-of-samples-copy-ratio ${default=100 num_samples_copy_ratio} \
-            --number-of-burn-in-samples-copy-ratio ${default=50 num_burn_in_copy_ratio} \
-            --number-of-samples-allele-fraction ${default=100 num_samples_allele_fraction} \
-            --number-of-burn-in-samples-allele-fraction ${default=50 num_burn_in_allele_fraction} \
+            --number-of-samples-copy-ratio ${default="100" num_samples_copy_ratio} \
+            --number-of-burn-in-samples-copy-ratio ${default="50" num_burn_in_copy_ratio} \
+            --number-of-samples-allele-fraction ${default="100" num_samples_allele_fraction} \
+            --number-of-burn-in-samples-allele-fraction ${default="50" num_burn_in_allele_fraction} \
             --smoothing-credible-interval-threshold-copy-ratio ${default="2.0" smoothing_threshold_copy_ratio} \
             --smoothing-credible-interval-threshold-allele-fraction ${default="2.0" smoothing_threshold_allele_fraction} \
-            --maximum-number-of-smoothing-iterations ${default=10 max_num_smoothing_iterations} \
-            --number-of-smoothing-iterations-per-fit ${default=0 num_smoothing_iterations_per_fit} \
+            --maximum-number-of-smoothing-iterations ${default="10" max_num_smoothing_iterations} \
+            --number-of-smoothing-iterations-per-fit ${default="0" num_smoothing_iterations_per_fit} \
             --output ${output_dir_} \
             --output-prefix ${entity_id}
 
@@ -673,6 +688,7 @@ task CallCopyRatioSegments {
 
     output {
         File called_copy_ratio_segments = "${entity_id}.called.seg"
+        File called_copy_ratio_legacy_segments = "${entity_id}.called.igv.seg"
     }
 }
 
