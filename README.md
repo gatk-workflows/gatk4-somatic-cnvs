@@ -1,20 +1,12 @@
 # somatic-cnvs
-Workflows for somatic copy number variant analysis
 
-## Running the Somatic CNV WDL
+### Purpose :
+Workflows for somatic copy number variant analysis.
 
-### Which WDL should you use?
+### cnv_somatic_panel_workflow :
+Builds a panel of normals (PoN) for the cnv pair workflow.
 
-- Building a panel of normals (PoN): ``cnv_somatic_panel_workflow.wdl``
-- Running a matched pair: ``cnv_somatic_pair_workflow.wdl``
-
-#### Setting up parameter json file for a run
-
-To get started, create the json template (using ``java -jar wdltool.jar inputs <workflow>``) for the workflow you wish to run and adjust parameters accordingly.
-
-*Please note that there are optional workflow-level and task-level parameters that do not appear in the template file.  These are set to reasonable values by default, but can also be adjusted if desired.*
-
-#### Required parameters in the somatic panel workflow
+#### Requirements/Expectations
 
 Important: The normal_bams samples in the json can be used test the wdl, they are NOT to be used to create a panel of normals for sequence analysis. For instructions on creating a proper PON please refer to user the documents https://software.broadinstitute.org/gatk/documentation/ .
 
@@ -37,7 +29,14 @@ In additional, there are optional workflow-level and task-level parameters that 
 
 Further explanation of other task-level parameters may be found by invoking the ``--help`` documentation available in the gatk.jar for each tool.
 
-#### Required parameters in the somatic pair workflow
+#### Outputs 
+- Read count pon in HD5 format
+- Addtional metrics
+
+### cnv_somatic_pair_workflow :
+Running a matched pair to obtain somatic copy number variants.
+
+#### Requirements/Expectations
 
 The reference and bins (if specified) must be the same between PoN and case samples.
 
@@ -62,4 +61,28 @@ To invoke Oncotator on the called tumor copy-ratio segments:
 
 Further explanation of these task-level parameters may be found by invoking the ``--help`` documentation available in the gatk.jar for each tool.
 
+#### Outputs
+- modeled segments for tumor and normal
+- modeled segments plot for tumor and normal
+- denoised copy ratios for tumor and normal
+- denoised copy ratios plot for tumor and normal
+- denoised copy ratios lim 4 plot for tumor and normal
+- Addtional metrics 
+
+### Software version requirements :
+- GATK4.1 or later 
+
+Cromwell version support 
+- Successfully tested on v37
+
+### Important Note :
+- Runtime parameters are optimized for Broad's Google Cloud Platform implementation.
+- For help running workflows on the Google Cloud Platform or locally please
+view the following tutorial [(How to) Execute Workflows from the gatk-workflows Git Organization](https://software.broadinstitute.org/gatk/documentation/article?id=12521).
+- The following material is provided by the GATK Team. Please post any questions or concerns to one of our forum sites : [GATK](https://gatkforums.broadinstitute.org/gatk/categories/ask-the-team/) , [FireCloud](https://gatkforums.broadinstitute.org/firecloud/categories/ask-the-firecloud-team) or [Terra](https://broadinstitute.zendesk.com/hc/en-us/community/topics/360000500432-General-Discussion) , [WDL/Cromwell](https://gatkforums.broadinstitute.org/wdl/categories/ask-the-wdl-team).
+- Please visit the [User Guide](https://software.broadinstitute.org/gatk/documentation/) site for further documentation on our workflows and tools.
+
+### LICENSING :
+Copyright Broad Institute, 2019 | BSD-3
+This script is released under the WDL open source code license (BSD-3) (full license text at https://github.com/openwdl/wdl/blob/master/LICENSE). Note however that the programs it calls may be subject to different licenses. Users are responsible for checking that they are authorized to run all programs before running this script.
 
