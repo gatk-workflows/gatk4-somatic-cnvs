@@ -14,7 +14,7 @@
   "CNVSomaticPairWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
 
   "##_COMMENT3": "Docker",
-  "CNVSomaticPairWorkflow.gatk_docker": "broadinstitute/gatk:4.1.0.0",
+  "CNVSomaticPairWorkflow.gatk_docker": "broadinstitute/gatk:4.1.1.0",
   "##CNVSomaticPairWorkflow.oncotator_docker": "(optional) String?",
 
   "##_COMMENT4": "Memory Optional",
