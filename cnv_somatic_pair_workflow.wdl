@@ -29,8 +29,8 @@
 #
 #############
 
-import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/dev/cnv_common_tasks.wdl" as CNVTasks
-import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/dev/cnv_somatic_oncotator_workflow.wdl" as CNVOncotator
+import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/1.3.0/cnv_common_tasks.wdl" as CNVTasks
+import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/1.3.0/cnv_somatic_oncotator_workflow.wdl" as CNVOncotator
 
 workflow CNVSomaticPairWorkflow {
 
