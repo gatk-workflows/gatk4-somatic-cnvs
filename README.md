@@ -70,10 +70,10 @@ Further explanation of these task-level parameters may be found by invoking the 
 - Addtional metrics 
 
 ### Software version requirements :
-- GATK4.1.1.0  
+- GATK4.1.3.0  
 
 Cromwell version support 
-- Successfully tested on v37
+- Successfully tested on v45
 
 ### Important Note :
 - Runtime parameters are optimized for Broad's Google Cloud Platform implementation.
@@ -81,6 +81,7 @@ Cromwell version support
 view the following tutorial [(How to) Execute Workflows from the gatk-workflows Git Organization](https://software.broadinstitute.org/gatk/documentation/article?id=12521).
 - The following material is provided by the GATK Team. Please post any questions or concerns to one of our forum sites : [GATK](https://gatkforums.broadinstitute.org/gatk/categories/ask-the-team/) , [FireCloud](https://gatkforums.broadinstitute.org/firecloud/categories/ask-the-firecloud-team) or [Terra](https://broadinstitute.zendesk.com/hc/en-us/community/topics/360000500432-General-Discussion) , [WDL/Cromwell](https://gatkforums.broadinstitute.org/wdl/categories/ask-the-wdl-team).
 - Please visit the [User Guide](https://software.broadinstitute.org/gatk/documentation/) site for further documentation on our workflows and tools.
+- The provided input json(s) is for workflow plumbing test purposes. Please read through the GATK Documentation and adjust the inputs accordingly.
 
 ### LICENSING :
 Copyright Broad Institute, 2019 | BSD-3
