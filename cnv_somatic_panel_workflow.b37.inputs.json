@@ -1,52 +1,15 @@
 {
-  "##_COMMENT1": "Inputs",
   "CNVSomaticPanelWorkflow.normal_bams": ["gs://gatk-test-data/cnv/somatic/SM-74NEG.bam", "gs://gatk-test-data/cnv/somatic/SM-74NF5.bam"],
   "CNVSomaticPanelWorkflow.normal_bais": ["gs://gatk-test-data/cnv/somatic/SM-74NEG.bam.bai", "gs://gatk-test-data/cnv/somatic/SM-74NF5.bam.bai"],
   "CNVSomaticPanelWorkflow.pon_entity_id": "wes-do-gc",
 
-  "##_COMMENT2": "Reference and Resource",
   "CNVSomaticPanelWorkflow.ref_fasta_dict": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.dict",
   "CNVSomaticPanelWorkflow.ref_fasta": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta",
   "CNVSomaticPanelWorkflow.ref_fasta_fai": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
   "CNVSomaticPanelWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
 
-  "##_COMMENT3": "Docker",
-  "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.1.1.0",
+  "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.1.4.0",
 
-  "##_COMMENT4": "Disk Size Optional",
-  "##CNVSomaticPanelWorkflow.AnnotateIntervals.disk_space_gb": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.PreprocessIntervals.disk_space_gb": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.disk_space_gb": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.CollectCounts.disk_space_gb": "(optional) Int?",
-
-  "##_COMMENT5": "Memory Optional",
-  "##CNVSomaticPanelWorkflow.mem_gb_for_collect_counts": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.mem_gb_for_create_read_count_pon": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.PreprocessIntervals.mem": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.AnnotateIntervals.mem": "(optional) Int?",
-
-
-  "##_COMMENT6": "Preemptibles Optional",
-  "CNVSomaticPanelWorkflow.preemptible_attempts": "3",
-
-  "##_COMMENT8": "CPU Optional",
-  "##CNVSomaticPanelWorkflow.PreprocessIntervals.cpu": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.CollectCounts.cpu": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.AnnotateIntervals.cpu": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.CreateReadCountPanelOfNormals.cpu": "(optional) Int?",
-
-  "##_COMMENT8": "MISC Optional",
-  "##CNVSomaticPanelWorkflow.format": "(optional) String?",
-  "##CNVSomaticPanelWorkflow.maximum_zeros_in_interval_percentage": "(optional) Float?",
-  "##CNVSomaticPanelWorkflow.minimum_interval_median_percentile": "(optional) Float?",
-  "##CNVSomaticPanelWorkflow.maximum_zeros_in_sample_percentage": "(optional) Float?",
-  "##CNVSomaticPanelWorkflow.extreme_sample_median_percentile": "(optional) Float?",
-  "##CNVSomaticPanelWorkflow.number_of_eigensamples": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.extreme_outlier_truncation_percentile": "(optional) Float?",
-  "##CNVSomaticPanelWorkflow.do_impute_zeros": "(optional) Boolean?",
-  "##CNVSomaticPanelWorkflow.padding": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.bin_length": "(optional) Int?",
-  "##CNVSomaticPanelWorkflow.do_explicit_gc_correction": "True",
-  "##CNVSomaticPanelWorkflow.gatk4_jar_override": "(optional) File?"
+  "CNVSomaticPanelWorkflow.preemptible_attempts": "3"
 }
 

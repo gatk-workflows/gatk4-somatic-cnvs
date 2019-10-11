@@ -1,11 +1,9 @@
 {
-  "##_COMMENT1": "Inputs",
   "CNVSomaticPairWorkflow.tumor_bam_idx": "gs://gatk-test-data/cnv/somatic/SM-74P4M.bam.bai",
   "CNVSomaticPairWorkflow.normal_bam": "gs://gatk-test-data/cnv/somatic/SM-74NEG.bam",
   "CNVSomaticPairWorkflow.normal_bam_idx": "gs://gatk-test-data/cnv/somatic/SM-74NEG.bam.bai",
   "CNVSomaticPairWorkflow.tumor_bam": "gs://gatk-test-data/cnv/somatic/SM-74P4M.bam",
   
-  "##_COMMENT2": "Reference and Resources",
   "CNVSomaticPairWorkflow.ref_fasta": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta",
   "CNVSomaticPairWorkflow.ref_fasta_fai": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
   "CNVSomaticPairWorkflow.ref_fasta_dict": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.dict",
@@ -13,10 +11,8 @@
   "CNVSomaticPairWorkflow.read_count_pon": "gs://gatk-test-data/cnv/somatic/wes-do-gc.pon.hdf5", 
   "CNVSomaticPairWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
 
-  "##_COMMENT3": "Docker",
-  "CNVSomaticPairWorkflow.gatk_docker": "broadinstitute/gatk:4.1.3.0",
+  "CNVSomaticPairWorkflow.gatk_docker": "broadinstitute/gatk:4.1.4.0",
 
-  "##_COMMENT4": "Misc Optional",
   "CNVSomaticPairWorkflow.is_run_funcotator": "true",
   "CNVSomaticPairWorkflow.funcotator_data_sources_tar_gz": "gs://broad-public-datasets/funcotator/funcotator_dataSources.v1.6.20190124s.tar.gz",
   "CNVSomaticPairWorkflow.funcotator_transcript_selection_list": "gs://broad-public-datasets/funcotator/transcriptList.exact_uniprot_matches.AKT1_CRLF2_FGFR1.txt"

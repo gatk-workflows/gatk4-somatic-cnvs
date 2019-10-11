@@ -70,7 +70,7 @@ Further explanation of these task-level parameters may be found by invoking the 
 - Addtional metrics 
 
 ### Software version requirements :
-- GATK4.1.3.0  
+- GATK4.1.4.0  
 
 Cromwell version support 
 - Successfully tested on v45
