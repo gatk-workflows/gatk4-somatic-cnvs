@@ -28,7 +28,7 @@
 
 #import "../cnv_common_tasks.wdl" as CNVTasks
 
-import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/1.4.0/cnv_common_tasks.wdl" as CNVTasks
+import "https://raw.githubusercontent.com/gatk-workflows/gatk4-somatic-cnvs/1.4.0/tasks/cnv_common_tasks.wdl" as CNVTasks
 
 workflow CNVSomaticPanelWorkflow {
 
