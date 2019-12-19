@@ -3,9 +3,9 @@
   "CNVSomaticPanelWorkflow.normal_bais": ["gs://gatk-test-data/cnv/somatic/SM-74NEG.bam.bai", "gs://gatk-test-data/cnv/somatic/SM-74NF5.bam.bai"],
   "CNVSomaticPanelWorkflow.pon_entity_id": "wes-do-gc",
 
-  "CNVSomaticPanelWorkflow.ref_fasta_dict": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.dict",
-  "CNVSomaticPanelWorkflow.ref_fasta": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta",
-  "CNVSomaticPanelWorkflow.ref_fasta_fai": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
+  "CNVSomaticPanelWorkflow.ref_fasta_dict": "gs://gcp-public-data--broad-references/hg19/v0/Homo_sapiens_assembly19.dict",
+  "CNVSomaticPanelWorkflow.ref_fasta": "gs://gcp-public-data--broad-references/hg19/v0/Homo_sapiens_assembly19.fasta",
+  "CNVSomaticPanelWorkflow.ref_fasta_fai": "gs://gcp-public-data--broad-references/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
   "CNVSomaticPanelWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
 
   "CNVSomaticPanelWorkflow.gatk_docker": "broadinstitute/gatk:4.1.4.0",

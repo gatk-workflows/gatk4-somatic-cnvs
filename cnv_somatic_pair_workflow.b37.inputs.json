@@ -4,9 +4,9 @@
   "CNVSomaticPairWorkflow.normal_bam_idx": "gs://gatk-test-data/cnv/somatic/SM-74NEG.bam.bai",
   "CNVSomaticPairWorkflow.tumor_bam": "gs://gatk-test-data/cnv/somatic/SM-74P4M.bam",
   
-  "CNVSomaticPairWorkflow.ref_fasta": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta",
-  "CNVSomaticPairWorkflow.ref_fasta_fai": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
-  "CNVSomaticPairWorkflow.ref_fasta_dict": "gs://broad-references/hg19/v0/Homo_sapiens_assembly19.dict",
+  "CNVSomaticPairWorkflow.ref_fasta": "gs://gcp-public-data--broad-references/hg19/v0/Homo_sapiens_assembly19.fasta",
+  "CNVSomaticPairWorkflow.ref_fasta_fai": "gs://gcp-public-data--broad-references/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
+  "CNVSomaticPairWorkflow.ref_fasta_dict": "gs://gcp-public-data--broad-references/hg19/v0/Homo_sapiens_assembly19.dict",
   "CNVSomaticPairWorkflow.common_sites": "gs://gatk-test-data/cnv/somatic/common_snps.interval_list",
   "CNVSomaticPairWorkflow.read_count_pon": "gs://gatk-test-data/cnv/somatic/wes-do-gc.pon.hdf5", 
   "CNVSomaticPairWorkflow.intervals": "gs://gatk-test-data/cnv/somatic/ice_targets.tsv.interval_list",
