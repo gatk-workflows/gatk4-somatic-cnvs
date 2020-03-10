@@ -8,7 +8,7 @@ Builds a panel of normals (PON) for the cnv pair workflow.
 
 #### Requirements/Expectations
 
-Important: The normal_bams samples in the json can be used test the wdl, they are NOT to be used to create a panel of normals for sequence analysis. For instructions on creating a proper PON please refer to user the documents [Panel of Normals](https://software.broadinstitute.org/gatk/documentation/article?id=11053) and [Generate a CNV panel of normals with CreateReadCountPanelOfNormals](https://gatkforums.broadinstitute.org/dsde/discussion/11682#2) .
+Important: The normal_bams samples in the json can be used test the wdl, they are NOT to be used to create a panel of normals for sequence analysis. For instructions on creating a proper PON please refer to user the documents [Panel of Normals](https://gatk.broadinstitute.org/hc/en-us/articles/360035890631) and [Generate a CNV panel of normals with CreateReadCountPanelOfNormals](https://gatk.broadinstitute.org/hc/en-us/articles/360035531092#2) .
 
 The reference used must be the same between PoN and case samples.
 
@@ -70,18 +70,19 @@ Further explanation of these task-level parameters may be found by invoking the 
 - Addtional metrics 
 
 ### Software version requirements :
-- GATK4.1.4.0  
-
+GATK 4.1.4.0
 Cromwell version support 
-- Successfully tested on v45
+  - Successfully tested on v45
 
-### Important Note :
+### Important Notes :
 - Runtime parameters are optimized for Broad's Google Cloud Platform implementation.
+- The provided JSON is a ready to use example JSON template of the workflow. Users are responsible for reviewing the [GATK Tool and Tutorial Documentations](https://gatk.broadinstitute.org/hc/en-us/categories/360002310591) to properly set the reference and resource variables. 
 - For help running workflows on the Google Cloud Platform or locally please
-view the following tutorial [(How to) Execute Workflows from the gatk-workflows Git Organization](https://software.broadinstitute.org/gatk/documentation/article?id=12521).
-- The following material is provided by the GATK Team. Please post any questions or concerns to one of our forum sites : [GATK](https://gatkforums.broadinstitute.org/gatk/categories/ask-the-team/) , [FireCloud](https://gatkforums.broadinstitute.org/firecloud/categories/ask-the-firecloud-team) or [Terra](https://broadinstitute.zendesk.com/hc/en-us/community/topics/360000500432-General-Discussion) , [WDL/Cromwell](https://gatkforums.broadinstitute.org/wdl/categories/ask-the-wdl-team).
-- Please visit the [User Guide](https://software.broadinstitute.org/gatk/documentation/) site for further documentation on our workflows and tools.
-- The provided input json(s) is for workflow plumbing test purposes. Please read through the GATK Documentation and adjust the inputs accordingly.
+view the following tutorial [(How to) Execute Workflows from the gatk-workflows Git Organization](https://gatk.broadinstitute.org/hc/en-us/articles/360035530952).
+- Relevant reference and resources bundles can be accessed in [Resource Bundle](https://gatk.broadinstitute.org/hc/en-us/articles/360036212652).
+
+### Contact Us :
+- The following material is provided by the Data Science Platforum group at the Broad Institute. Please direct any questions or concerns to one of our forum sites : [GATK](https://gatk.broadinstitute.org/hc/en-us/community/topics) or [Terra](https://support.terra.bio/hc/en-us/community/topics/360000500432).
 
 ### LICENSING :
 Copyright Broad Institute, 2019 | BSD-3
